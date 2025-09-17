@@ -1,0 +1,42 @@
+<div class="container mt-4">
+  <h2>Mercados Cadastrados</h2>
+
+  <!-- Loading -->
+  <div *ngIf="loading" class="text-center mt-5">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Carregando...</span>
+    </div>
+    <p class="mt-2">Carregando mercados...</p>
+  </div>
+
+  <!-- Lista de Mercados -->
+  <div *ngIf="!loading" class="row">
+    <div *ngFor="let mercado of mercados" class="col-md-4 mb-4">
+      <div class="card h-100 mercado-card">
+        <div class="card-body">
+          <h5 class="card-title">{{ mercado.nome }}</h5>
+          <p class="card-text">
+            <i class="fas fa-envelope"></i> {{ mercado.email }}<br>
+            <i class="fas fa-phone"></i> {{ mercado.telefone }}<br>
+            <i class="fas fa-map-marker-alt"></i> {{ mercado.endereco }}
+          </p>
+          <p class="card-text">
+            <small class="text-muted">CNPJ: {{ mercado.cnpj }}</small>
+          </p>
+        </div>
+        <div class="card-footer bg-transparent">
+          <button class="btn btn-primary btn-sm" (click)="verProdutos(mercado.id!)">
+            <i class="fas fa-box-open"></i> Ver Produtos
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mensagem se não houver mercados -->
+  <div *ngIf="!loading && mercados.length === 0" class="text-center mt-5">
+    <div class="alert alert-info">
+      <i class="fas fa-info-circle"></i> Nenhum mercado cadastrado.
+    </div>
+  </div>
+</div>
