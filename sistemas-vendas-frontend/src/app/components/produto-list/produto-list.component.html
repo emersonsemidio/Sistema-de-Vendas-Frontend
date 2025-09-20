@@ -1,0 +1,67 @@
+<div class="container mt-4">
+  <h2>Produtos do Mercado</h2>
+
+  <!-- Loading -->
+  <div *ngIf="loading" class="text-center mt-5">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Carregando...</span>
+    </div>
+    <p class="mt-2">Carregando produtos...</p>
+  </div>
+
+  <!-- Lista de Produtos -->
+  <div *ngIf="!loading" class="row justify-content-center">
+    <div *ngFor="let produto of produtos" class="col-md-6 col-lg-4 col-xl-3 mb-4">
+      <div class="card produto-card h-100 mx-auto" style="max-width: 280px;">
+
+        <!-- Imagem do Produto -->
+        <div class="produto-imagem-container">
+          <img [src]="produto.imagemUrl || 'assets/imagem-padrao.jpg'"
+               [alt]="produto.nome"
+               class="produto-imagem">
+          <div class="produto-status" [class.esgotado]="produto.quantidade === 0">
+            {{ produto.quantidade === 0 ? 'ESGOTADO' : 'DISPONÍVEL' }}
+          </div>
+        </div>
+
+        <div class="card-body d-flex flex-column">
+          <!-- Nome do Produto -->
+          <h5 class="card-title produto-nome">{{ produto.nome }}</h5>
+
+          <div class="produto-info flex-grow-1">
+            <!-- Descrição -->
+            <div class="info-item descricao" *ngIf="produto.descricao">
+              <i class="fas fa-align-left"></i>
+              <span class="info-text">{{ produto.descricao | slice:0:60 }}{{ produto.descricao.length > 60 ? '...' : '' }}</span>
+            </div>
+
+            <!-- Preço -->
+            <div class="info-item preco-item">
+              <i class="fas fa-tag"></i>
+              <span class="info-text preco">R$ {{ produto.preco | number:'1.2-2' }}</span>
+            </div>
+
+            <!-- Estoque -->
+            <div class="info-item">
+              <i class="fas fa-boxes"></i>
+              <span class="info-text">{{ produto.quantidade }} unidades</span>
+            </div>
+
+            <div class="">
+                <button class="btn btn-primary btn-sm">
+                   Comprar
+                </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mensagem se não houver produtos -->
+  <div *ngIf="!loading && produtos.length === 0" class="text-center mt-5">
+    <div class="alert alert-info">
+      <i class="fas fa-info-circle"></i> Nenhum produto encontrado.
+    </div>
+  </div>
+</div>

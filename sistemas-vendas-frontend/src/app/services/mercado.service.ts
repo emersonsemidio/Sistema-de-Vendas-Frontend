@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Mercado } from '../models/mercado.model';
+import { Produto } from '../models/produto.model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,10 @@ export class MercadoService {
 
   getAll(): Observable<Mercado[]> {
     return this.http.get<Mercado[]>(this.apiUrl);
+  }
+
+  getProdutosByMercadoId(mercadoId: number): Observable<Produto[]> {
+    return this.http.get<Produto[]>(`${this.apiUrl}/${mercadoId}/produtos`);
   }
 
   getById(id: number): Observable<Mercado> {

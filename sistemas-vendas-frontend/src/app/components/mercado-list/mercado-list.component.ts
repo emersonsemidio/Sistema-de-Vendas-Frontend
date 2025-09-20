@@ -17,11 +17,13 @@ export class MercadoListComponent implements OnInit {
     this.carregarMercados();
   }
 
+
   carregarMercados(): void {
     this.mercadoService.getAll().subscribe({
       next: (data) => {
         this.mercados = data;
         this.loading = false;
+
       },
       error: (error) => {
         console.error('Erro ao carregar mercados:', error);

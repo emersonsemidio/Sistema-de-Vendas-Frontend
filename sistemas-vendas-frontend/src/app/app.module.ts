@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 // Importar o componente
 import { MercadoListComponent } from './components/mercado-list/mercado-list.component';
+import { ProdutoListComponent } from './components/produto-list/produto-list.component';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -13,13 +15,16 @@ import { AppRoutingModule } from './app-routing.module';
   declarations: [
     // ... outros componentes
     MercadoListComponent,
+    ProdutoListComponent,
     AppComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     RouterModule,
-    AppRoutingModule
+    AppRoutingModule,
+    CommonModule,
+    FormsModule
 
   ],
   providers: [],

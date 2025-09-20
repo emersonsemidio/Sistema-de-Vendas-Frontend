@@ -25,8 +25,8 @@
           </p>
         </div>
         <div class="card-footer bg-transparent">
-          <button class="btn btn-primary btn-sm" (click)="verProdutos(mercado.id!)">
-            <i class="fas fa-box-open"></i> Ver Produtos
+          <button class="btn btn-primary btn-sm" [routerLink]="['/mercados', mercado.id, 'produtos']">
+            Ver Produtos
           </button>
         </div>
       </div>
