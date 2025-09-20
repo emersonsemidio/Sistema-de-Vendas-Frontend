@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 // Importar o componente
 import { MercadoListComponent } from './components/mercado-list/mercado-list.component';
 import { ProdutoListComponent } from './components/produto-list/produto-list.component';
+import { QuantidadeModalComponent } from './components/quantidade-modal/quantidade-modal.component';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -16,7 +17,8 @@ import { AppRoutingModule } from './app-routing.module';
     // ... outros componentes
     MercadoListComponent,
     ProdutoListComponent,
-    AppComponent
+    AppComponent,
+    QuantidadeModalComponent
   ],
   imports: [
     BrowserModule,

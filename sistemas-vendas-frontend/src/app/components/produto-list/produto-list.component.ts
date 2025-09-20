@@ -14,6 +14,9 @@ export class ProdutoListComponent implements OnInit {
   mercadoId!: number;
   nomeMercado: string = '';
 
+  produtoSelecionado: Produto | null = null;
+  showModal: boolean = false;
+
   constructor(
     private mercadoService: MercadoService,
     private route: ActivatedRoute
@@ -41,4 +44,17 @@ export class ProdutoListComponent implements OnInit {
       }
     });
   }
+
+  // Abrir modal para selecionar quantidade
+  abrirModalQuantidade(produto: Produto): void {
+    this.produtoSelecionado = produto;
+    this.showModal = true;
+  }
+
+  // Fechar modal
+  fecharModal(): void {
+    this.showModal = false;
+    this.produtoSelecionado = null;
+  }
+
 }
