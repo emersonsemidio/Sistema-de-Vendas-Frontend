@@ -1,58 +1,49 @@
-<div class="modal-backdrop" *ngIf="showModal" (click)="fecharModal()">
-  <div class="modal-container" (click)="$event.stopPropagation()">
-    <div class="modal-header">
-      <h5 class="modal-title">Visualizar Produto</h5>
-      <button type="button" class="btn-close" (click)="fecharModal()">
-        <i class="fas fa-times"></i>
+<div class="modal" *ngIf="showModal">
+  <div class="modal-content">
+    <!-- Informações do cliente -->
+    <div *ngIf="cliente" class="cliente-info">
+      <h3>Cliente: {{ cliente.nome }} (ID: {{ cliente.id }})</h3>
+    </div>
+
+    <h2>Comprar Produto</h2>
+
+    <div *ngIf="produto" class="produto-info">
+      <p><strong>Produto:</strong> {{ produto.nome }}</p>
+      <p><strong>Preço unitário:</strong> R$ {{ produto.preco | number:'1.2-2' }}</p>
+      <p><strong>Estoque disponível:</strong> {{ maxQuantidade }} unidades</p>
+    </div>
+
+    <div class="quantidade-section">
+      <label>Quantidade:</label>
+      <div class="quantidade-controls">
+        <button (click)="diminuirQuantidade()">-</button>
+        <input
+          type="number"
+          [(ngModel)]="quantidade"
+          (change)="validarQuantidade()"
+          min="1"
+          [max]="maxQuantidade"
+          class="quantidade-input"
+        >
+        <button (click)="aumentarQuantidade()">+</button>
+      </div>
+    </div>
+
+    <div class="total-section">
+      <p><strong>Total:</strong> R$ {{ calcularTotal() | number:'1.2-2' }}</p>
+    </div>
+
+    <!-- Mensagem de feedback -->
+    <div *ngIf="mensagem" class="mensagem" [class.sucesso]="sucesso" [class.erro]="!sucesso">
+      {{ mensagem }}
+    </div>
+
+    <div class="modal-buttons">
+      <button class="btn-cancelar" (click)="fecharModal()" [disabled]="loading">
+        Cancelar
       </button>
-    </div>
-
-    <div class="modal-body">
-      <div class="produto-info text-center">
-        <h6>{{ produto.nome }}</h6>
-        <p class="text-muted">{{ produto.descricao }}</p>
-        <p class="preco">Preço: R$ {{ produto.preco | number:'1.2-2' }}</p>
-        <p class="estoque">Estoque: {{ produto.quantidade }} unidades</p>
-      </div>
-
-      <div class="quantidade-selector">
-        <label>Quantidade demonstrativa:</label>
-        <div class="input-group">
-          <button class="btn btn-outline-secondary"
-                  (click)="diminuirQuantidade()"
-                  [disabled]="quantidade <= 1">
-            <i class="fas fa-minus"></i>
-          </button>
-
-          <input type="number"
-                 class="form-control text-center"
-                 [(ngModel)]="quantidade"
-                 (change)="validarQuantidade()"
-                 [max]="maxQuantidade"
-                 min="1"
-                 disabled> <!-- Desabilita input -->
-
-          <button class="btn btn-outline-secondary"
-                  (click)="aumentarQuantidade()"
-                  [disabled]="quantidade >= maxQuantidade">
-            <i class="fas fa-plus"></i>
-          </button>
-        </div>
-      </div>
-
-      <div class="total-section">
-        <strong>Total demonstrativo: R$ {{ (produto.preco * quantidade) | number:'1.2-2' }}</strong>
-      </div>
-
-      <div class="alert alert-info mt-3">
-        <i class="fas fa-info-circle"></i>
-        Funcionalidade de carrinho em desenvolvimento
-      </div>
-    </div>
-
-    <div class="modal-footer">
-      <button type="button" class="btn btn-primary" (click)="fecharModal()">
-        <i class="fas fa-check"></i> Entendi
+      <button class="btn-confirmar" (click)="confirmarCompra()" [disabled]="loading">
+        {{ loading ? 'Processando...' : 'Confirmar Compra' }}
       </button>
     </div>
   </div>

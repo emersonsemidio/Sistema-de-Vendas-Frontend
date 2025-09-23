@@ -60,6 +60,9 @@
       <app-quantidade-modal
         [produto]="produtoSelecionado!"
         [showModal]="showModal"
+        [cliente]="clienteTeste"
+        [mercadoId]="mercadoId"
+        (confirmar)="onCompraRealizada($event)"
         (fechar)="fecharModal()">
       </app-quantidade-modal>
   </div>
