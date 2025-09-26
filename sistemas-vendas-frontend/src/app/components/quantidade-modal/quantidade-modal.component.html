@@ -33,6 +33,7 @@
       <p><strong>Total:</strong> R$ {{ calcularTotal() | number:'1.2-2' }}</p>
     </div>
 
+
     <!-- Mensagem de feedback -->
     <div *ngIf="mensagem" class="mensagem" [class.sucesso]="sucesso" [class.erro]="!sucesso">
       {{ mensagem }}
@@ -43,8 +44,15 @@
         Cancelar
       </button>
       <button class="btn-confirmar" (click)="confirmarCompra()" [disabled]="loading">
-        {{ loading ? 'Processando...' : 'Confirmar Compra' }}
+        {{ loading ? 'Processando...' : 'Adicionar ao Carrinho' }}
       </button>
     </div>
+
+    <app-carrinho
+      [produto]="produto"
+      [mercadoId]="mercadoId"
+      [cliente]="cliente"
+    ></app-carrinho>
+
   </div>
 </div>

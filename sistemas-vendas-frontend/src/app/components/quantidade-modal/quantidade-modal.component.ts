@@ -1,20 +1,32 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Produto } from '../../models/produto.model';
-import { CompraService, CompraRequest, CompraResponse } from '../../services/compra.service';
+import {
+  CompraService,
+  CompraRequest,
+  CompraResponse,
+} from '../../services/compra.service';
+import { CarrinhoService } from 'src/app/services/carrinho.service';
 
 @Component({
   selector: 'app-quantidade-modal',
   templateUrl: './quantidade-modal.component.html',
-  styleUrls: ['./quantidade-modal.component.css']
+  styleUrls: ['./quantidade-modal.component.css'],
 })
 export class QuantidadeModalComponent {
   @Input() produto!: Produto;
   @Input() showModal: boolean = false;
   @Input() cliente!: any;
-
   @Input() mercadoId!: number;
+  @Input() modoCarrinho: boolean = false; // NOVO: Define se é para carrinho
 
-  @Output() confirmar = new EventEmitter<{produto: Produto, quantidade: number, compraResponse?: CompraResponse}>();
+  @Output() confirmar = new EventEmitter<{
+    produto: Produto;
+    quantidade: number;
+  }>();
+  @Output() adicionarAoCarrinho = new EventEmitter<{
+    produto: Produto;
+    quantidade: number;
+  }>(); // NOVO
   @Output() fechar = new EventEmitter<void>();
 
   quantidade: number = 1;
@@ -22,7 +34,10 @@ export class QuantidadeModalComponent {
   mensagem: string = '';
   sucesso: boolean = false;
 
-  constructor(private compraService: CompraService) {}
+  constructor(
+    private compraService: CompraService,
+    private carrinhoService: CarrinhoService
+  ) {}
 
   get maxQuantidade(): number {
     return this.produto?.quantidade || 1;
@@ -41,11 +56,10 @@ export class QuantidadeModalComponent {
   }
 
   async confirmarCompra(): Promise<void> {
+    console.log('Confirmar compra chamado');
     this.loading = true;
     this.mensagem = '';
 
-    try {
-      // Validações
       if (!this.cliente || !this.cliente.id) {
         throw new Error('Cliente não selecionado');
       }
@@ -54,68 +68,77 @@ export class QuantidadeModalComponent {
         throw new Error('Produto não selecionado');
       }
 
-      // Preparar dados da compra
-      const compraData: CompraRequest = {
-        clienteId: this.cliente.id,
-        mercadoId: this.mercadoId,
-        total: this.calcularTotal(),
-        formaPagamento: 'PIX',
-        status: 'PENDENTE',
-        itens: [
-          {
-            produtoId: this.produto.id,
-            quantidade: this.quantidade
-          }
-        ]
-      };
-      console.log('Dados da compra:', compraData);
 
-      // Chamar o serviço de compra
-      // const compraResponse = await this.compraService.realizarCompra(compraData).toPromise();
-      this.compraService.realizarCompra(compraData).subscribe({
-        next: (compraResponse) => {
-          console.log('Compra realizada com sucesso:', compraResponse);
-          // Emitir sucesso para o componente pai
-          this.confirmar.emit({
-            produto: this.produto,
-            quantidade: this.quantidade,
-            compraResponse: compraResponse
-          });
+        console.log('Adicionando ao carrinho:')
+        // NOVO: Modo carrinho - apenas adiciona ao carrinho
+        this.adicionarAoCarrinho.emit({
+          produto: this.produto,
+          quantidade: this.quantidade,
+        });
 
-          this.mostrarMensagem('Compra realizada com sucesso!', true);
+        this.carrinhoService.adicionarItem(this.produto, this.quantidade);
 
-          // Fechar modal após 2 segundos
-          setTimeout(() => {
-            this.fecharModal();
-          }, 2000);
-        },
-        error: (error) => {
-          console.error('Erro ao confirmar compra:', error);
-          this.mostrarMensagem(
-            error.error?.message || error.message || 'Erro ao realizar compra',
-            false
-          );
-          this.loading = false;
-        }
-      });
+        this.mostrarMensagem('Produto adicionado ao carrinho!', true);
 
-    } catch (error: any) {
-      console.error('Erro ao confirmar compra:', error);
-      this.mostrarMensagem(
-        error.error?.message || error.message || 'Erro ao realizar compra',
-        false
-      );
-    } finally {
-      this.loading = false;
-    }
+        setTimeout(() => {
+          this.fecharModal();
+        }, 1500);
+
+        this.loading = false;
+
+        // Modo compra direta (existente)
+
+
+
+
+
   }
+
+  // confirmarCompraCarrinho(): void {
+
+  //   const compraData: CompraRequest = {
+  //     clienteId: this.cliente.id,
+  //     mercadoId: this.mercadoId,
+  //     total: this.calcularTotal(),
+  //     formaPagamento: 'PIX',
+  //     status: 'PENDENTE',
+  //     itens: this.carrinhoService
+  //       .obterItens()
+  //       .map((item) => {
+  //         console.log(item);
+  //         return {
+  //           produtoId: item.produto.id,
+  //           quantidade: item.quantidade,
+  //         };
+  //       }),
+  //   };
+
+  //     this.compraService.realizarCompra(compraData).subscribe({
+  //       next: (compraResponse) => {
+  //         this.confirmar.emit({
+  //           produto: this.produto,
+  //           quantidade: this.quantidade
+  //         });
+
+  //         this.mostrarMensagem('Compra realizada com sucesso!', true);
+
+  //         setTimeout(() => {
+  //           this.fecharModal();
+  //         }, 2000);
+  //       },
+  //       error: (error) => {
+  //         this.mostrarMensagem(
+  //           error.error?.message || error.message || 'Erro ao realizar compra',
+  //           false
+  //         );
+  //         this.loading = false;
+  //       }
+  //     })
+
+  // }
 
   calcularTotal(): number {
     return this.produto ? this.produto.preco * this.quantidade : 0;
-  }
-
-  calcularTotal2(acumulado: number): number {
-    return this.produto ? this.produto.preco * this.quantidade : 0 + acumulado;
   }
 
   private mostrarMensagem(msg: string, sucesso: boolean) {

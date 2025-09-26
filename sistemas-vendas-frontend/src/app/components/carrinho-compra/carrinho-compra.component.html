@@ -1,0 +1,71 @@
+<!-- Modal do Carrinho -->
+<div
+  class="modal fade show"
+  tabindex="-1"
+  *ngIf="showModal"
+  style="display: block; background: rgba(0, 0, 0, 0.5);"
+>
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <!-- Cabeçalho -->
+      <div class="modal-header">
+        <h5 class="modal-title">Carrinho de Compras</h5>
+        <button type="button" class="btn-close" (click)="fecharModal()"></button>
+      </div>
+
+      <!-- Corpo -->
+      <div class="modal-body">
+        <!-- Mensagem de sucesso/erro -->
+        <div *ngIf="mensagem" class="alert" [ngClass]="sucesso ? 'alert-success' : 'alert-danger'">
+          {{ mensagem }}
+        </div>
+        <!-- <div>
+          <h6>Detalhes do Carrinho:</h6>
+          <pre>
+            {{ carrinho | json }}
+          </pre>
+        </div> -->
+        <!-- Lista de itens do carrinho -->
+        <div *ngIf="carrinho?.length > 0; else vazio">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Produto</th>
+                <th>Preço</th>
+                <th>Quantidade</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of carrinho">
+                <td>{{ item.produto.nome }}</td>
+                <td>R$ {{ item.produto.preco | number:'1.2-2' }}</td>
+                <td>{{ item.quantidade }}</td>
+                <td>R$ {{ (item.produto.preco * item.quantidade) | number:'1.2-2' }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Carrinho vazio -->
+        <ng-template #vazio>
+          <p class="text-center text-muted">Seu carrinho está vazio.</p>
+        </ng-template>
+
+        <!-- Total -->
+        <div class="d-flex justify-content-between mt-3" *ngIf="carrinho?.length > 0">
+          <strong>Total:</strong>
+          <span>R$ {{ calcularTotal() | number:'1.2-2' }}</span>
+        </div>
+      </div>
+
+      <!-- Rodapé -->
+      <div class="modal-footer" *ngIf="carrinho?.length > 0">
+        <button class="btn btn-secondary" (click)="fecharModal()">Continuar comprando</button>
+        <button class="btn btn-success" [disabled]="loading" (click)="confirmarCompraCarrinho()">
+          {{ loading ? 'Processando...' : 'Confirmar Compra' }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

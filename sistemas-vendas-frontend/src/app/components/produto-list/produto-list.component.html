@@ -9,6 +9,8 @@
     <p class="mt-2">Carregando produtos...</p>
   </div>
 
+
+
   <!-- Lista de Produtos -->
   <div *ngIf="!loading" class="row justify-content-center">
     <div *ngFor="let produto of produtos" class="col-md-6 col-lg-4 col-xl-3 mb-4">
@@ -61,10 +63,24 @@
         [produto]="produtoSelecionado!"
         [showModal]="showModal"
         [cliente]="clienteTeste"
-        [mercadoId]="mercadoId"
         (confirmar)="onCompraRealizada($event)"
         (fechar)="fecharModal()">
       </app-quantidade-modal>
+
+      <div class="botao-abrir-modal">
+        <button class="btn btn-primary btn-sm" (click)="abrirModalCarrinho()">
+          <i class="fas fa-eye"></i> Mostrar Carrinho
+        </button>
+      </div>
+
+<!-- Aqui renderiza o carrinho -->
+      <app-carrinho
+        [showModal]="showModalCarrinho"
+        [mercadoId]="mercadoId"
+        [cliente]="clienteTeste"
+        (fechar)="fecharModalCarrinho()">
+      </app-carrinho>
+
   </div>
 
   <!-- Mensagem se não houver produtos -->

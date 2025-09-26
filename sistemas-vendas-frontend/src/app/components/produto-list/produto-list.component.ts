@@ -16,6 +16,8 @@ export class ProdutoListComponent implements OnInit {
   produtoSelecionado: Produto | null = null;
   showModal: boolean = false;
 
+  showModalCarrinho: boolean = false; // NOVO: Controla exibição do modal do carrinho
+
   clienteTeste: any = {
     id: 1, // ⚠️ Altere para um ID que exista no seu backend
     nome: 'Cliente Teste',
@@ -56,10 +58,23 @@ export class ProdutoListComponent implements OnInit {
     this.showModal = true;
   }
 
+
+  abrirModalCarrinho(): void {
+    this.showModalCarrinho = true;
+  }
+
+  XPOO(): void {
+    this.showModalCarrinho = true;
+  }
+
   // Fechar modal
   fecharModal(): void {
     this.showModal = false;
     this.produtoSelecionado = null;
+  }
+
+  fecharModalCarrinho(): void {
+    this.showModalCarrinho = false;
   }
 
   // ADICIONAR no ProdutoListComponent

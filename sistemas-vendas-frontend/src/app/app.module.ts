@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { MercadoListComponent } from './components/mercado-list/mercado-list.component';
 import { ProdutoListComponent } from './components/produto-list/produto-list.component';
 import { QuantidadeModalComponent } from './components/quantidade-modal/quantidade-modal.component';
+import { CarrinhoComponent } from './components/carrinho-compra/carrinho-compra.component';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -18,7 +19,9 @@ import { AppRoutingModule } from './app-routing.module';
     MercadoListComponent,
     ProdutoListComponent,
     AppComponent,
-    QuantidadeModalComponent
+    QuantidadeModalComponent,
+    CarrinhoComponent
+
   ],
   imports: [
     BrowserModule,
