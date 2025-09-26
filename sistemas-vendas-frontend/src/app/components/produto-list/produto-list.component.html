@@ -63,7 +63,6 @@
         [produto]="produtoSelecionado!"
         [showModal]="showModal"
         [cliente]="clienteTeste"
-        (confirmar)="onCompraRealizada($event)"
         (fechar)="fecharModal()">
       </app-quantidade-modal>
 
@@ -78,6 +77,7 @@
         [showModal]="showModalCarrinho"
         [mercadoId]="mercadoId"
         [cliente]="clienteTeste"
+        (confirmar)="onCompraRealizada($event)"
         (fechar)="fecharModalCarrinho()">
       </app-carrinho>
 

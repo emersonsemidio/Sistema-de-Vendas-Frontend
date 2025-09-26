@@ -93,9 +93,6 @@ export class CarrinhoComponent implements OnInit {
 
     }
 
-  calcularTotal(): number {
-    return this.produto ? this.produto.preco * this.quantidade : 0;
-  }
 
   private mostrarMensagem(msg: string, sucesso: boolean) {
     this.mensagem = msg;
@@ -133,5 +130,15 @@ export class CarrinhoComponent implements OnInit {
       this.carrinho.splice(index, 1);
       this.carrinhoService.atualizarCarrinho(this.carrinho);
     }
+
+
+  }
+
+  calcularTotal(): number {
+      let total = 0;
+      for (const item of this.carrinho) {
+          total += item.produto.preco * item.quantidade;
+      }
+      return total;
   }
 }

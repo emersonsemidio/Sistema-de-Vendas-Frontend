@@ -18,11 +18,6 @@ export class QuantidadeModalComponent {
   @Input() cliente!: any;
   @Input() mercadoId!: number;
   @Input() modoCarrinho: boolean = false; // NOVO: Define se é para carrinho
-
-  @Output() confirmar = new EventEmitter<{
-    produto: Produto;
-    quantidade: number;
-  }>();
   @Output() adicionarAoCarrinho = new EventEmitter<{
     produto: Produto;
     quantidade: number;
