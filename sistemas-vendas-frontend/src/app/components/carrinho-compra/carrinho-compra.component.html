@@ -10,7 +10,7 @@
       <!-- Cabeçalho -->
       <div class="modal-header">
         <h5 class="modal-title">Carrinho de Compras</h5>
-        <button type="button" class="btn-close" (click)="fecharModal()"></button>
+        <button type="button" (click)="fecharModal()">X</button>
       </div>
 
       <!-- Corpo -->
@@ -19,12 +19,6 @@
         <div *ngIf="mensagem" class="alert" [ngClass]="sucesso ? 'alert-success' : 'alert-danger'">
           {{ mensagem }}
         </div>
-        <!-- <div>
-          <h6>Detalhes do Carrinho:</h6>
-          <pre>
-            {{ carrinho | json }}
-          </pre>
-        </div> -->
         <!-- Lista de itens do carrinho -->
         <div *ngIf="carrinho?.length > 0; else vazio">
           <table class="table">

@@ -10,6 +10,14 @@
   </div>
 
 
+  <div class="botao-abrir-carrinho">
+    <button class="btn btn-primary btn-sm" (click)="abrirModalCarrinho()">
+      <i class="fas fa-shopping-cart"></i>
+      <span class="carrinho-texto">Meu Carrinho</span>
+    </button>
+  </div>
+
+
 
   <!-- Lista de Produtos -->
   <div *ngIf="!loading" class="row justify-content-center">
@@ -66,11 +74,6 @@
         (fechar)="fecharModal()">
       </app-quantidade-modal>
 
-      <div class="botao-abrir-modal">
-        <button class="btn btn-primary btn-sm" (click)="abrirModalCarrinho()">
-          <i class="fas fa-eye"></i> Mostrar Carrinho
-        </button>
-      </div>
 
 <!-- Aqui renderiza o carrinho -->
       <app-carrinho

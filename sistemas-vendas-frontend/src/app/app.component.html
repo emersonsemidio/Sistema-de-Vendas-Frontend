@@ -1,11 +1,24 @@
-<!-- Menu de navegação simples -->
-<nav class="navbar navbar-light bg-light">
-  <div class="container">
-    <h1 class="navbar-brand" href="#">
-      <i class="fas fa-store"></i> Sistema de Vendas
-    </h1>
+<nav class="simple-navbar">
+  <div class="nav-container">
+    <!-- Logo -->
+    <div class="nav-brand">
+      <i class="fas fa-store"></i>
+      <span>Sistema de Vendas</span>
+    </div>
+
+    <!-- Menu -->
+    <div class="nav-menu">
+      <a routerLink="/" class="nav-item">
+        <i class="fas fa-home"></i> Início
+      </a>
+      <a routerLink="/mercados" class="nav-item">
+        <i class="fas fa-store-alt"></i> Mercados
+      </a>
+      <a routerLink="/contato" class="nav-item">
+        <i class="fas fa-envelope"></i> Contato
+      </a>
+    </div>
   </div>
 </nav>
 
-<!-- Aqui o MercadoList será carregado -->
 <router-outlet></router-outlet>
