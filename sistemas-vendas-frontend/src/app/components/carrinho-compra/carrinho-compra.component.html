@@ -34,6 +34,7 @@
                 <th>Preço</th>
                 <th>Quantidade</th>
                 <th>Total</th>
+                <th>Ações</th>
               </tr>
             </thead>
             <tbody>
@@ -42,6 +43,17 @@
                 <td>R$ {{ item.produto.preco | number:'1.2-2' }}</td>
                 <td>{{ item.quantidade }}</td>
                 <td>R$ {{ (item.produto.preco * item.quantidade) | number:'1.2-2' }}</td>
+                <td>
+                  <button class="btn btn-sm btn-secondary" (click)="diminuirQuantidade(item)">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                  <button class="btn btn-sm btn-secondary" (click)="aumentarQuantidade(item)">
+                    <i class="fas fa-plus"></i>
+                  </button>
+                  <button class="btn btn-sm btn-danger" (click)="removerItem(item)">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </td>
               </tr>
             </tbody>
           </table>

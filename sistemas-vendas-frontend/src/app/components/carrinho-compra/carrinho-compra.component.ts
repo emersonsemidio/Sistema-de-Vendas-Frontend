@@ -111,4 +111,27 @@ export class CarrinhoComponent implements OnInit {
   continuarComprando(): void {
     this.router.navigate(['/mercados', this.carrinho.mercadoId, 'produtos']);
   }
+
+   aumentarQuantidade(item: any): void {
+    item.quantidade++;
+    this.carrinhoService.atualizarCarrinho(this.carrinho);
+  }
+
+  diminuirQuantidade(item: any): void {
+    if (item.quantidade > 1) {
+      item.quantidade--;
+    } else {
+      // Opcional: remover item se quantidade chegar a 0
+      this.removerItem(item);
+      return;
+    }
+  }
+
+    removerItem(item: any): void {
+    const index = this.carrinho.findIndex((i: any) => i.produto.id === item.produto.id);
+    if (index > -1) {
+      this.carrinho.splice(index, 1);
+      this.carrinhoService.atualizarCarrinho(this.carrinho);
+    }
+  }
 }

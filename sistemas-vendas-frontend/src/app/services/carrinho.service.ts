@@ -1,3 +1,4 @@
+import { QuantidadeModalComponent } from './../components/quantidade-modal/quantidade-modal.component';
 // services/carrinho.service.ts
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
@@ -75,6 +76,12 @@ export class CarrinhoService {
   // Contar itens
   getTotalItens(): number {
     return this.carrinhoSubject.value.reduce((total, item) => total + item.quantidade, 0);
+  }
+
+  atualizarCarrinho(carrinho: any[]): void {
+    this.carrinhoSubject.next(carrinho);
+    this.salvarNoLocalStorage();
+
   }
 
   // Persistência

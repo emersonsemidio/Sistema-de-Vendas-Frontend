@@ -35,7 +35,6 @@ export class QuantidadeModalComponent {
   sucesso: boolean = false;
 
   constructor(
-    private compraService: CompraService,
     private carrinhoService: CarrinhoService
   ) {}
 
