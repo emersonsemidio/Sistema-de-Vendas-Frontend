@@ -1,42 +1,24 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { EmailValidator, FormControl } from '@angular/forms';
-import { FormGroup } from '@angular/forms';
-import { Validators } from '@angular/forms';
-import { NotificationService } from '../../services/notification.service';
-import { FormsModule } from '@angular/forms';
-
-  interface LoginForm {
-    email: FormControl;
-    senha: FormControl;
-  }
-
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
-
-
-
 })
 export class LoginComponent {
 
 
-  constructor(private authService: AuthService, private notificationService: NotificationService) { }
-
-    loginForm = new FormGroup({
-      email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required, Validators.minLength(6)])
-    })
+  constructor(private authService: AuthService, private toastr: ToastrService) { }
 
   login(email: string, password: string): void {
     this.authService.login(email, password).subscribe({
       next: (response) => {
-        this.notificationService.success('Login bem-sucedido!', response.cliente.nome);
+        this.toastr.success('Login realizado com sucesso!');
       },
       error: (error) => {
-        this.notificationService.error('Erro ao fazer login:', error);
+        this.toastr.error('Erro ao fazer login! Verifique suas credenciais e tente novamente.');
       }
     });
   }

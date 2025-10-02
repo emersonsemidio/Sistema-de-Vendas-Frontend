@@ -14,3 +14,108 @@ body {
 .primary-color { color: #2980b9; }    /* Azul confiável */
 .secondary-color { color: #75c7b7; }  /* Verde água */
 .accent-color { color: #e74c3c; }     /* Vermelho para ofertas */
+
+
+/* ESTILO FORÇADO - 100% FUNCIONAL */
+/* ESTILO BASE PARA TODOS OS TOASTS */
+.ngx-toastr {
+  z-index: 99999 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+  border-radius: 12px !important;
+  padding: 20px !important;
+  min-height: 20px !important;
+  width: 250px !important;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+  border-left: 6px solid !important;
+}
+
+/* CONTAINER PRINCIPAL */
+.toast-container {
+  z-index: 99999 !important;
+  position: fixed !important;
+}
+
+.toast-top-right {
+  top: 5px !important;
+  right: 5px !important;
+  position: fixed !important;
+}
+
+/* TOAST DE SUCESSO - VERDE */
+.toast-success {
+  background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%) !important;
+  color: white !important;
+  border-left-color: #2E7D32 !important;
+}
+
+.toast-success .toast-title {
+  font-weight: 600 !important;
+  font-size: 16px !important;
+  margin-bottom: 5px !important;
+}
+
+.toast-success .toast-message {
+  font-size: 14px !important;
+  opacity: 0.9 !important;
+}
+
+/* TOAST DE ERRO - VERMELHO */
+.toast-error {
+  background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%) !important;
+  color: white !important;
+  border-left-color: #b71c1c !important;
+}
+
+.toast-error .toast-title {
+  font-weight: 600 !important;
+  font-size: 16px !important;
+  margin-bottom: 5px !important;
+}
+
+.toast-error .toast-message {
+  font-size: 14px !important;
+  opacity: 0.9 !important;
+}
+
+.toast-info .toast-title {
+  font-weight: 600 !important;
+  font-size: 16px !important;
+  margin-bottom: 5px !important;
+}
+
+.toast-info .toast-message {
+  font-size: 14px !important;
+  opacity: 0.9 !important;
+}
+
+.toast-warning .toast-title {
+  font-weight: 600 !important;
+  font-size: 16px !important;
+  margin-bottom: 5px !important;
+}
+
+.toast-warning .toast-message {
+  font-size: 14px !important;
+  opacity: 0.9 !important;
+}
+
+/* BOTÃO FECHAR */
+.toast-close-button {
+  color: white !important;
+  opacity: 0.8 !important;
+  font-weight: bold !important;
+  font-size: 16px !important;
+  right: 10px !important;
+  top: 10px !important;
+}
+
+.toast-close-button:hover {
+  opacity: 1 !important;
+  color: white !important;
+}
+
+/* BARRA DE PROGRESSO */
+.toast-progress {
+  background: rgba(255, 255, 255, 0.3) !important;
+  height: 3px !important;
+}

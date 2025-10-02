@@ -11,5 +11,5 @@ interface Cliente {
 
 export interface AuthResponse {
   token: string;
-  cliente: Cliente;
+  email: string;
 }

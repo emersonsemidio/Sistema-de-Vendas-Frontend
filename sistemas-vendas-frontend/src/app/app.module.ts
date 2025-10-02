@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // Importar o componente
 import { MercadoListComponent } from './components/mercado-list/mercado-list.component';
@@ -13,6 +14,7 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './components/login/login.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -30,8 +32,15 @@ import { LoginComponent } from './components/login/login.component';
     RouterModule,
     AppRoutingModule,
     CommonModule,
-    FormsModule
-
+    FormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-top-right',
+      maxOpened: 3,
+      preventDuplicates: true,
+      progressBar: true,
+    }), // ToastrModule added
   ],
   providers: [],
   bootstrap: [AppComponent]

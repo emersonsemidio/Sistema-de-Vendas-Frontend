@@ -19,7 +19,7 @@ export class AuthService {
       tap(response => {
         // Armazene o token no localStorage ou em outro lugar seguro
         localStorage.setItem('authToken', response.token);
-        localStorage.setItem('userEmail', response.cliente.email);
+        localStorage.setItem('userEmail', response.email);
       })
     );
   }
