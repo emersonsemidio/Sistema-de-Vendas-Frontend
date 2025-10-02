@@ -12,6 +12,7 @@ import { CarrinhoComponent } from './components/carrinho-compra/carrinho-compra.
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -20,8 +21,8 @@ import { AppRoutingModule } from './app-routing.module';
     ProdutoListComponent,
     AppComponent,
     QuantidadeModalComponent,
-    CarrinhoComponent
-
+    CarrinhoComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
