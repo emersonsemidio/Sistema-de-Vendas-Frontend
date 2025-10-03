@@ -17,6 +17,10 @@ export class AuthService {
   login(email: string, senha: string): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(this.url, { email, senha }).pipe(
       tap(response => {
+        console.log('🔑 RESPOSTA COMPLETA DO LOGIN:', response);
+        console.log('🔑 TIPO DA RESPOSTA:', typeof response);
+        console.log('🔑 PROPRIEDADES:', Object.keys(response));
+        console.log('🔑 TOKEN EXTRAÍDO:', response.token);
         // Armazene o token no localStorage ou em outro lugar seguro
         localStorage.setItem('authToken', response.token);
         localStorage.setItem('userEmail', response.email);

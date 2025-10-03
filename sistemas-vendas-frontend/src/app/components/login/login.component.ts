@@ -18,7 +18,7 @@ export class LoginComponent {
         this.toastr.success('Login realizado com sucesso!');
       },
       error: (error) => {
-        this.toastr.error('Erro ao fazer login! Verifique suas credenciais e tente novamente.');
+        this.toastr.error('Erro ao fazer login! Verifique suas credenciais e tente novamente.', error.message);
       }
     });
   }
