@@ -7,19 +7,22 @@ import { Observable } from 'rxjs';
 export class AuthInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // Recupera o token do localStorage
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('authToken');
+
+    console.log('AuthInterceptor - Token encontrado:', token);
 
     // Se existir token, clona a requisição e adiciona o header Authorization
     if (token) {
-      // const currentHeaders = req.headers ? req.headers : {};
-      // console.log('Current Headers:', currentHeaders);
-      // const authReq = req.clone({
-      //   setHeaders: {
-      //     ...currentHeaders,
-      //     Authorization: `Bearer ${token}`
-      //   }
-      // });
-      // return next.handle(authReq);
+      console.log('Adicionando token à requisição:', token);
+      const currentHeaders = req.headers ? req.headers : {};
+      console.log('Current Headers:', currentHeaders);
+      const authReq = req.clone({
+        setHeaders: {
+          // ...currentHeaders,
+          Authorization: `Bearer ${token}`
+        }
+      });
+      return next.handle(authReq);
     }
 
     // Se não tiver token, passa a requisição original

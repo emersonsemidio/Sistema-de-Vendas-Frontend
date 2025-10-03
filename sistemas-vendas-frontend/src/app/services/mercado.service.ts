@@ -13,17 +13,12 @@ export class MercadoService {
   constructor(private http: HttpClient) { }
 
   getAll(): Observable<Mercado[]> {
-    const token = localStorage.getItem('authToken') || ''
-    const Authorization = `Bearer ${token}`;
     console.log('chamou passando Authoriation')
-    return this.http.get<Mercado[]>(this.apiUrl, {
-      headers: {
-        Authorization
-      }
-    });
+    return this.http.get<Mercado[]>(this.apiUrl);
   }
 
   getProdutosByMercadoId(mercadoId: number): Observable<Produto[]> {
+    console.log('chamou getProdutosByMercadoId passando Authoriation')
     return this.http.get<Produto[]>(`${this.apiUrl}/${mercadoId}/produtos`);
   }
 
