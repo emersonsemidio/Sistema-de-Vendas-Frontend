@@ -6,9 +6,9 @@ import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './services/auth-guard.service';
 
 const routes: Routes = [
-  { path: 'mercados', component: MercadoListComponent, canActivate: [AuthGuard] }, // ← Rota para seu componente
-  { path: 'produtos', component: ProdutoListComponent, canActivate: [AuthGuard] },
-  { path: 'mercados/:id/produtos', component: ProdutoListComponent, canActivate: [AuthGuard] }, // ← Rota para o componente de produtos
+  { path: 'mercados', component: MercadoListComponent }, // ← Rota para seu componente
+  { path: 'produtos', component: ProdutoListComponent },
+  { path: 'mercados/:id/produtos', component: ProdutoListComponent,  }, // ← Rota para o componente de produtos
   { path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
   { path: '', redirectTo: '/login', pathMatch: 'full' } // Rota padrão redirecionando para /mercados
 ];

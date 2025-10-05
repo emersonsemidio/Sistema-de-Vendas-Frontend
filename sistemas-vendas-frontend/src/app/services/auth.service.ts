@@ -28,6 +28,24 @@ export class AuthService {
     );
   }
 
+  getClienteId(): number | null {
+    const token = this.getToken();
+    if (!token) return null;
+
+    try {
+      // Decodifica o token JWT (parte do payload)
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      console.log('🔐 Payload do Token:', payload);
+
+      // O ID do cliente pode vir em diferentes campos:
+      return payload.id || payload.userId || payload.clienteId || null;
+    } catch (error) {
+      console.error('Erro ao decodificar token:', error);
+      return null;
+    }
+  }
+
+
   logout(): void {
     // Remove o token e dados do usuário
     localStorage.removeItem('authToken');

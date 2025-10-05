@@ -9,7 +9,7 @@ export interface ItemCompra {
 }
 
 export interface CompraRequest {
-  clienteId: number;
+  clienteId: number | null;
   mercadoId: number;
   total: number;
   formaPagamento: string;

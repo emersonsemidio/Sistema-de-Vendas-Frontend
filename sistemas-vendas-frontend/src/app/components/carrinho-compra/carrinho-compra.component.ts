@@ -1,3 +1,4 @@
+import { AuthService } from './../../services/auth.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { CarrinhoService, ItemCarrinho } from '../../services/carrinho.service';
@@ -37,7 +38,9 @@ export class CarrinhoComponent implements OnInit {
   constructor(
     public carrinhoService: CarrinhoService,
     private compraService: CompraService,
-    private router: Router
+    private router: Router,
+
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -50,8 +53,13 @@ export class CarrinhoComponent implements OnInit {
 
     confirmarCompraCarrinho(): void {
 
+      if (!this.authService.isLoggedIn()) {
+        this.mostrarMensagem('Você precisa estar logado para confirmar a compra.', false);
+        return;
+      }
+
       const compraData: CompraRequest = {
-        clienteId: this.cliente.id,
+        clienteId: this.authService.getClienteId(),
         mercadoId: this.mercadoId,
         total: this.calcularTotal(),
         formaPagamento: 'PIX',
@@ -66,6 +74,8 @@ export class CarrinhoComponent implements OnInit {
             };
           }),
       };
+
+      console.log('Dados da compra:', compraData);
 
         this.compraService.realizarCompra(compraData).subscribe({
           next: (compraResponse) => {
