@@ -1,0 +1,39 @@
+<div class="user-dropdown" [class.show]="isOpen" (click)="$event.stopPropagation()">
+  <!-- Header com informações do usuário -->
+  <div class="user-info">
+    <div class="avatar">
+      <i class="fas fa-user-circle"></i>
+    </div>
+    <div class="user-details">
+      <strong>{{ user.name || 'Usuário' }}</strong>
+      <span>{{ user?.email || '' }}</span>
+    </div>
+  </div>
+
+  <div class="dropdown-divider"></div>
+
+  <!-- Menu de opções -->
+  <div class="dropdown-menu">
+    <a routerLink="/perfil" class="menu-item" (click)="onClose()">
+      <i class="fas fa-user"></i>
+      <span>Meu Perfil</span>
+    </a>
+
+    <a routerLink="/configuracoes" class="menu-item" (click)="onClose()">
+      <i class="fas fa-cog"></i>
+      <span>Configurações</span>
+    </a>
+
+    <a routerLink="/pedidos" class="menu-item" (click)="onClose()">
+      <i class="fas fa-shopping-bag"></i>
+      <span>Meus Pedidos</span>
+    </a>
+
+    <div class="dropdown-divider"></div>
+
+    <button class="menu-item logout-btn" (click)="onLogout()">
+      <i class="fas fa-sign-out-alt"></i>
+      <span>Sair</span>
+    </button>
+  </div>
+</div>

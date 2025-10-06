@@ -70,5 +70,48 @@
     border-radius: 50%;
   }
 
+  .user-menu-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.user-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: none;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: #333;
+  font-size: 14px;
+}
+
+.user-toggle:hover {
+  background: #f8f9fa;
+  border-color: #ccc;
+}
+
+.user-toggle i.fa-chevron-down {
+  font-size: 12px;
+  transition: transform 0.2s;
+}
+
+.user-toggle i.fa-chevron-down.rotate {
+  transform: rotate(180deg);
+}
+
+.user-toggle i.fa-user-circle {
+  font-size: 16px;
+  color: #666;
+}
+
+/* Fechar dropdown ao clicar fora */
+:host {
+  display: block;
+}
+
 
 }

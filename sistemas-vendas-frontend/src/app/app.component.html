@@ -13,12 +13,29 @@
       <a routerLink="/mercados" class="nav-item">
         <i class="fas fa-store-alt"></i> Mercados
       </a>
-      <div class="nav-botao-login">
+
+      <!-- Área de Login/Usuário -->
+      <div class="nav-botao-login" *ngIf="!usuarioEstaLogado">
         <a routerLink="/login" class="nav-item">
           <i class="fas fa-user"></i> Login
         </a>
       </div>
 
+      <!-- Dropdown do usuário logado -->
+      <div class="nav-item" *ngIf="usuarioEstaLogado">
+        <button class="user-toggle" (click)="toggleDropdown()">
+          <i class="fas fa-user-circle"></i>
+          <span>Minha Conta</span>
+          <i class="fas fa-chevron-down" [class.rotate]="dropdownOpen"></i>
+        </button>
+
+        <app-user-dropdown
+          [isOpen]="dropdownOpen"
+          [user]="currentUser"
+          (logout)="logout()"
+          (close)="closeDropdown()">
+        </app-user-dropdown>
+      </div>
     </div>
   </div>
 </nav>
