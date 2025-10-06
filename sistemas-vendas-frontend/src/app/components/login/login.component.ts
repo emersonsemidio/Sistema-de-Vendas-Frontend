@@ -24,4 +24,8 @@ export class LoginComponent {
       }
     });
   }
+
+  telaCadastro(): void {
+    this.router.navigate(['/cadastro']);
+  }
 }
