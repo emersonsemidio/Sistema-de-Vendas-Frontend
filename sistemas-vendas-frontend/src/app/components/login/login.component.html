@@ -1,44 +1,75 @@
 <div class="login-container">
-  <div class="login-card">
-    <div class="login-header">
-      <h2>Login</h2>
-      <p>Entre na sua conta</p>
+  <div class="login-content">
+    <!-- Lado Esquerdo - Formulário -->
+    <div class="form-section">
+      <div class="login-card">
+        <div class="login-header">
+          <h2>Login</h2>
+          <p>Entre na sua conta</p>
+        </div>
+
+        <form class="login-form">
+          <!-- Campo Email -->
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              #emailInput
+              class="form-control"
+              placeholder="seu@email.com"
+            >
+          </div>
+
+          <!-- Campo Senha -->
+          <div class="form-group">
+            <label for="senha">Senha</label>
+            <input
+              type="password"
+              id="senha"
+              #passwordInput
+              class="form-control"
+              placeholder="Sua senha"
+            >
+          </div>
+
+          <!-- Lembrar-me e Esqueci a senha -->
+          <div class="form-options">
+            <label class="checkbox-container">
+              <input type="checkbox">
+              <span class="checkmark"></span>
+              Lembrar-me
+            </label>
+            <a href="#" class="forgot-password">Esqueci a senha</a>
+          </div>
+
+          <!-- Botão Entrar -->
+          <button type="button" (click)="login(emailInput.value, passwordInput.value)" class="btn btn-primary">
+            Entrar
+          </button>
+
+          <!-- Divisor -->
+          <div class="divider">
+            <span>ou</span>
+          </div>
+
+          <!-- Botão Cadastro -->
+          <button type="button" class="btn btn-secondary">
+            Criar Nova Conta
+          </button>
+        </form>
+      </div>
     </div>
 
-    <form class="login-form">
-      <!-- Campo Email -->
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input
-          type="email"
-          id="email"
-          #emailInput
-          class="form-control"
-          placeholder="seu@email.com"
-        >
+    <!-- Lado Direito - Imagem -->
+    <div class="image-section">
+      <div class="image-content">
+        <img src="https://cdn.leonardo.ai/users/bce54a3b-f9fe-481c-84c1-77bf7ef0a22e/generations/985d67a3-7bd8-4760-8641-15b75981ccb9/Leonardo_Phoenix_10_Um_carrinho_de_compras_vazio_e_solitrio_es_0.jpg" alt="Login Image" class="login-image">
+        <div class="image-text">
+          <h3>Bem-vindo de volta!</h3>
+          <p>Entre em sua conta para acessar o sistema</p>
+        </div>
       </div>
-
-      <!-- Campo Senha -->
-      <div class="form-group">
-        <label for="senha">Senha</label>
-        <input
-          type="password"
-          id="senha"
-          #passwordInput
-          class="form-control"
-          placeholder="Sua senha"
-        >
-      </div>
-
-      <!-- Botão Entrar -->
-      <button type="button" (click)="login(emailInput.value, passwordInput.value)" class="btn btn-primary btn-block">
-        Entrar
-      </button>
-
-      <!-- Botão Cadastro -->
-      <button type="button" class="btn btn-secondary btn-block">
-        Criar Nova Conta
-      </button>
-    </form>
+    </div>
   </div>
 </div>
