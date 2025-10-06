@@ -5,6 +5,11 @@
 
 }
 
+.nav-user-dropdown {
+  position: relative; /* Isso é ESSENCIAL para o dropdown se posicionar corretamente */
+  display: inline-block;
+}
+
 .nav-container {
   margin: 0 auto;
   padding: 0 20px;
