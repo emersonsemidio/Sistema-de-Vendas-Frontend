@@ -4,13 +4,14 @@ import { MercadoListComponent } from './components/mercado-list/mercado-list.com
 import { ProdutoListComponent } from './components/produto-list/produto-list.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './services/auth-guard.service';
+import { CadastroComponent } from './components/cadastro/cadastro.component';
 
 const routes: Routes = [
   { path: 'mercados', component: MercadoListComponent }, // ← Rota para seu componente
   { path: 'produtos', component: ProdutoListComponent },
   { path: 'mercados/:id/produtos', component: ProdutoListComponent,  }, // ← Rota para o componente de produtos
   { path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
-  { path: '', redirectTo: '/login', pathMatch: 'full' } // Rota padrão redirecionando para /mercados
+  { path: 'cadastro', component: CadastroComponent }, // Rota para o componente de cadastro
 ];
 
 @NgModule({

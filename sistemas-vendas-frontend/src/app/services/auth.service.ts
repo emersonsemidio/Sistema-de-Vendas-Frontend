@@ -10,12 +10,12 @@ import { tap } from 'rxjs';
 
 export class AuthService {
 
-  private url = 'http://localhost:8080/auth/login'; // Ajuste para sua URL
+  private url = 'http://localhost:8080/auth'; // Ajuste para sua URL
 
   constructor(private http: HttpClient) {}
 
   login(email: string, senha: string): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(this.url, { email, senha }).pipe(
+    return this.http.post<AuthResponse>(`${this.url}/login`, { email, senha }).pipe(
       tap(response => {
         console.log('🔑 RESPOSTA COMPLETA DO LOGIN:', response);
         console.log('🔑 TIPO DA RESPOSTA:', typeof response);
@@ -26,6 +26,10 @@ export class AuthService {
         localStorage.setItem('userEmail', response.email);
       })
     );
+  }
+
+  cadastrarCliente(cliente: any): Observable<any> {
+    return this.http.post<any>(`${this.url}/register`, cliente);
   }
 
   getClienteId(): number | null {
