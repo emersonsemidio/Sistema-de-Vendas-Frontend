@@ -84,12 +84,18 @@
         (fechar)="fecharModalCarrinho()">
       </app-carrinho>
 
+        <div *ngIf="!loading && produtos.length === 0" class="sem-produtos">
+          <div class="alert alert-info">
+            <i class="fas fa-info-circle"></i> Nenhum produto encontrado.
+          </div>
+        </div>
+
   </div>
 
   <!-- Mensagem se não houver produtos -->
-  <div *ngIf="!loading && produtos.length === 0" class="text-center mt-5">
+  <!-- <div *ngIf="!loading && produtos.length === 0" class="sem-produtos">
     <div class="alert alert-info">
       <i class="fas fa-info-circle"></i> Nenhum produto encontrado.
     </div>
-  </div>
+  </div> -->
 </div>

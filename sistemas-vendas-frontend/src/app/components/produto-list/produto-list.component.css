@@ -175,7 +175,7 @@ h2::after {
   margin: 0 auto; /* 👈 Centraliza */
   padding: 20px;
   margin: 0 15%; /* 👈 100% - 15% - 15% = 70% */
-  background-color: red;
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
 }
 
 .produto-card {
@@ -208,6 +208,12 @@ div.botao-abrir-carrinho {
   position: absolute;
   right: 20px;
   top: 20px;
+}
+
+.sem-produtos {
+  text-align: center;
+  color: #6c757d;
+  font-size: 1.2rem;
 }
 
 /* Responsividade */
