@@ -94,6 +94,11 @@
   border-color: #ccc;
 }
 
+.fas.fa-user-circle {
+  display: absolute;
+  margin-right: 8px;
+;}
+
 .user-toggle i.fa-chevron-down {
   font-size: 12px;
   transition: transform 0.2s;
