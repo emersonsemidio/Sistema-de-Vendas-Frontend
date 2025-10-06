@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { AuthResponse } from '../models/auth.model';
 import { tap } from 'rxjs';
 import { BehaviorSubject } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class AuthService {
 
   private url = 'http://localhost:8080/auth'; // Ajuste para sua URL
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
     this.start();
   }
 
@@ -86,6 +87,10 @@ getCurrentUser() {
     // Remove o token e dados do usuário
     localStorage.removeItem('authToken');
     localStorage.removeItem('userEmail');
+
+    this.router.navigate(['/login']).then(() => {
+      window.location.reload();
+    });
   }
 
   getToken(): string | null {

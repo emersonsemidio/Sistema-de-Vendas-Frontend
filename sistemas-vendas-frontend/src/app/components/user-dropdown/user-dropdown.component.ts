@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
@@ -17,6 +18,8 @@ export class UserDropdownComponent {
 
   onLogout() {
     this.authService.logout();
+    this.logout.emit();
+    this.onClose();
   }
 
   onClose() {
