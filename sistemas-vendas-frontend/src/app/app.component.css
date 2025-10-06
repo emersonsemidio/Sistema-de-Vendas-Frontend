@@ -6,7 +6,6 @@
 }
 
 .nav-container {
-  max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
   display: flex;
@@ -30,7 +29,10 @@
 
 .nav-menu {
   display: flex;
+  width: 100%;
+  margin-left: 5%;
   gap: 20px;
+  align-items: flex-start;
 }
 
 .nav-item {
