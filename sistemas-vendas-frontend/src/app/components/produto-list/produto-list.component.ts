@@ -42,6 +42,9 @@ export class ProdutoListComponent implements OnInit {
     this.loading = true;
     this.mercadoService.getProdutosByMercadoId(this.mercadoId).subscribe({
       next: (data) => {
+        // this.produtos = [...data, ...data];
+        // this.produtos.pop();
+        // this.produtos.pop();
         this.produtos = data;
         this.loading = false;
       },
