@@ -1,5 +1,5 @@
 <div class="container mt-4">
-  <h2>Mercados Cadastrados</h2>
+  <h2>Produtos</h2>
 
   <!-- Loading -->
   <div *ngIf="loading" class="text-center mt-5">
@@ -15,14 +15,8 @@
       <div class="card h-100 mercado-card">
         <div class="card-body">
           <h5 class="card-title">{{ mercado.nome }}</h5>
-          <p class="card-text">
-            <i class="fas fa-envelope"></i> {{ mercado.email }}<br>
-            <i class="fas fa-phone"></i> {{ mercado.telefone }}<br>
-            <i class="fas fa-map-marker-alt"></i> {{ mercado.endereco }}
-          </p>
-          <p class="card-text">
-            <small class="text-muted">CNPJ: {{ mercado.cnpj }}</small>
-          </p>
+
+          <img src="../../../assets/Leonardo_Phoenix_10_Um_carrinho_de_compras_vazio_e_solitrio_es_0.jpg" class="img-card" alt="">
         </div>
         <div class="card-footer bg-transparent">
           <button class="btn btn-primary btn-sm" [routerLink]="['/mercados', mercado.id, 'produtos']">
