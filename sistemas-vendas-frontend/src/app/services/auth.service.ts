@@ -6,6 +6,13 @@ import { tap } from 'rxjs';
 import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 
+interface Payload {
+  sub: string; // Geralmente o email ou username
+  nome?: string;
+  email?: string;
+  id?: number;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -46,12 +53,12 @@ getCurrentUser() {
   if (!token) return null;
 
   try {
-    const payload = JSON.parse(atob(token.split('.')[1]));
+    const payload = JSON.parse(atob(token.split('.')[1])) as Payload;
     console.log('🔐 Payload do Token:', payload);
 
     // Extrai email e nome baseado em claims padrão
     return {
-      name: payload.name || payload.sub || 'Usuário',
+      name: payload.nome || payload.sub || 'Usuário',
       email: payload.email || payload.sub, // sub geralmente é o email em alguns sistemas
       // Outros campos que podem estar disponíveis
     };

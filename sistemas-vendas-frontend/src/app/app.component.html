@@ -23,7 +23,7 @@
 
       <!-- Dropdown do usuário logado -->
       <div *ngIf="usuarioEstaLogado" class="nav-user-dropdown">
-        <a class="nav-item user-toggle" (click)="toggleDropdown(); $event.stopPropagation()">
+        <a class="nav-item hover" (click)="toggleDropdown(); $event.stopPropagation()">
           <i class="fas fa-user-circle"></i>
           <span>Minha Conta</span>
           <i class="fas fa-chevron-down" [class.rotate]="dropdownOpen"></i>

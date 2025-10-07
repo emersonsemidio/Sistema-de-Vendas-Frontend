@@ -9,12 +9,15 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 })
 export class UserDropdownComponent {
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService) {
+    console.log(this.user)
+  }
 
   @Input() isOpen = false;
   @Input() user: any;
   @Output() logout = new EventEmitter<void>();
   @Output() close = new EventEmitter<void>();
+
 
   onLogout() {
     this.authService.logout();

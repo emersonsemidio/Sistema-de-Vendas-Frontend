@@ -46,6 +46,8 @@ export class ProdutoListComponent implements OnInit {
         // this.produtos.pop();
         // this.produtos.pop();
         this.produtos = data;
+        // this.produtos.pop();
+        // this.produtos.pop();
         this.loading = false;
       },
       error: (error) => {

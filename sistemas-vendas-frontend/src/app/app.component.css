@@ -27,6 +27,10 @@
   gap: 10px;
 }
 
+.hover:hover {
+  cursor: pointer;
+}
+
 .nav-brand .fas {
   color: #4CAF50;
   font-size: 1.6rem;
