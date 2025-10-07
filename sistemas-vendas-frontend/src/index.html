@@ -9,6 +9,35 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+
+  <script>
+  // Configuração simples do vídeo de fundo
+  document.addEventListener('DOMContentLoaded', function() {
+    const video = document.createElement('video');
+    video.id = 'bgVideo';
+    video.src = 'assets/Fundo_pagina_lanchonete.mp4'; // ALTERE AQUI
+    video.muted = true;
+    video.loop = true;
+    video.autoplay = true;
+    video.style.cssText = `
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -999;
+      opacity: 0.5;
+    `;
+
+    document.body.appendChild(video);
+  });
+</script>
+
   <app-root></app-root>
+
+
+
+
 </body>
 </html>

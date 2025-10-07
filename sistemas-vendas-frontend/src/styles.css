@@ -6,10 +6,6 @@ body {
   min-height: 100vh;
 }
 
-.simple-navbar {
-  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-}
-
 /* Cores complementares */
 .primary-color { color: #2980b9; }    /* Azul confiável */
 .secondary-color { color: #75c7b7; }  /* Verde água */
@@ -118,4 +114,23 @@ body {
 .toast-progress {
   background: rgba(255, 255, 255, 0.3) !important;
   height: 3px !important;
+}
+
+/* Garante que o conteúdo fique acima do vídeo */
+app-root {
+  position: relative;
+  z-index: 1;
+}
+
+/* Opcional: overlay para melhor legibilidade */
+body::before {
+  content: '';
+  position: fixed;
+  opacity: 0.1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: -998;
 }
