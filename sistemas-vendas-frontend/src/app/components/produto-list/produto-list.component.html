@@ -9,7 +9,6 @@
     <p class="mt-2">Carregando produtos...</p>
   </div>
 
-
   <div class="botao-abrir-carrinho">
     <button class="btn btn-primary btn-sm" (click)="abrirModalCarrinho()">
       <i class="fas fa-shopping-cart"></i>
@@ -19,16 +18,23 @@
 
   <!-- Lista de Produtos -->
   <div *ngIf="!loading" class="container-centralizado">
-    <div *ngFor="let produto of produtos" class="col-md-6x col-lg-4xx col-xl-3 mb-4xs">
-      <div class="card produto-card h-100 mx-auto" style="max-width: 280px;">
-
+    <div
+      *ngFor="let produto of produtos"
+      class="col-md-6x col-lg-4xx col-xl-3 mb-4xs"
+    >
+      <div class="card produto-card h-100 mx-auto" style="max-width: 280px">
         <!-- Imagem do Produto -->
         <div class="produto-imagem-container">
-          <img [src]="produto.imagemUrl || 'assets/imagem-padrao.jpg'"
-               [alt]="produto.nome"
-               class="produto-imagem">
-          <div class="produto-status" [class.esgotado]="produto.quantidade === 0">
-            {{ produto.quantidade === 0 ? 'ESGOTADO' : 'DISPONÍVEL' }}
+          <img
+            [src]="'assets/salgado.jpg'"
+            [alt]="produto.nome"
+            class="produto-imagem"
+          />
+          <div
+            class="produto-status"
+            [class.esgotado]="produto.quantidade === 0"
+          >
+            {{ produto.quantidade === 0 ? "ESGOTADO" : "DISPONÍVEL" }}
           </div>
         </div>
 
@@ -40,13 +46,18 @@
             <!-- Descrição -->
             <div class="info-item descricao" *ngIf="produto.descricao">
               <i class="fas fa-align-left"></i>
-              <span class="info-text">{{ produto.descricao | slice:0:60 }}{{ produto.descricao.length > 60 ? '...' : '' }}</span>
+              <span class="info-text"
+                >{{ produto.descricao | slice : 0 : 60
+                }}{{ produto.descricao.length > 60 ? "..." : "" }}</span
+              >
             </div>
 
             <!-- Preço -->
             <div class="info-item preco-item">
               <i class="fas fa-tag"></i>
-              <span class="info-text preco">R$ {{ produto.preco | number:'1.2-2' }}</span>
+              <span class="info-text preco"
+                >R$ {{ produto.preco | number : "1.2-2" }}</span
+              >
             </div>
 
             <!-- Estoque -->
@@ -56,38 +67,40 @@
             </div>
 
             <div class="botao-abrir-modal">
-              <button class="btn btn-primary btn-sm"
-                      (click)="abrirModalQuantidade(produto)">
-                <i class="fas fa-eye"></i> Comprar
+              <button
+                class="botao-comprar"
+                (click)="abrirModalQuantidade(produto)"
+              >
+                Comprar
               </button>
             </div>
           </div>
         </div>
       </div>
     </div>
-      <app-quantidade-modal
-        [produto]="produtoSelecionado!"
-        [showModal]="showModal"
-        [cliente]="clienteTeste"
-        (fechar)="fecharModal()">
-      </app-quantidade-modal>
+    <app-quantidade-modal
+      [produto]="produtoSelecionado!"
+      [showModal]="showModal"
+      [cliente]="clienteTeste"
+      (fechar)="fecharModal()"
+    >
+    </app-quantidade-modal>
 
+    <!-- Aqui renderiza o carrinho -->
+    <app-carrinho
+      [showModal]="showModalCarrinho"
+      [mercadoId]="mercadoId"
+      [cliente]="clienteTeste"
+      (confirmar)="onCompraRealizada($event)"
+      (fechar)="fecharModalCarrinho()"
+    >
+    </app-carrinho>
 
-<!-- Aqui renderiza o carrinho -->
-      <app-carrinho
-        [showModal]="showModalCarrinho"
-        [mercadoId]="mercadoId"
-        [cliente]="clienteTeste"
-        (confirmar)="onCompraRealizada($event)"
-        (fechar)="fecharModalCarrinho()">
-      </app-carrinho>
-
-        <div *ngIf="!loading && produtos.length === 0" class="sem-produtos">
-          <div class="alert alert-info">
-            <i class="fas fa-info-circle"></i> Nenhum produto encontrado.
-          </div>
-        </div>
-
+    <div *ngIf="!loading && produtos.length === 0" class="sem-produtos">
+      <div class="alert alert-info">
+        <i class="fas fa-info-circle"></i> Nenhum produto encontrado.
+      </div>
+    </div>
   </div>
 
   <!-- Mensagem se não houver produtos -->

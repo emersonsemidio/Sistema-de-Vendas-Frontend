@@ -47,6 +47,7 @@ h2::after {
   overflow: hidden;
   margin-bottom: 25px;
   width: 400px;
+  background-color: #1b1e1f;
 }
 
 .mercado-card:hover {
