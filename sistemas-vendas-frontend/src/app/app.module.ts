@@ -20,6 +20,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './components/login/login.component';
 import { CadastroComponent } from './components/cadastro/cadastro.component';
 import { UserDropdownComponent } from './components/user-dropdown/user-dropdown.component';
+import { SobreComponent } from './components/sobre/sobre.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { UserDropdownComponent } from './components/user-dropdown/user-dropdown.
     CadastroComponent,
     LoginComponent,
     UserDropdownComponent,
+    SobreComponent,
   ],
   imports: [
     BrowserModule,
