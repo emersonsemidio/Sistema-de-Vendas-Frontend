@@ -4,7 +4,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #f8fafc;
+  background: transparent;
 }
 
 .login-content {
@@ -21,12 +21,16 @@
   align-items: center;
   justify-content: center;
   padding: 40px;
-  background: white;
 }
 
 .login-card {
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  padding: 40px;
   width: 100%;
-  max-width: 400px;
+  max-width: 450px;
+  background-color: #1b1e1f;
+  opacity: 0.8;
 }
 
 .login-header {
@@ -35,7 +39,7 @@
 }
 
 .login-header h2 {
-  color: #1a202c;
+  color: #ffffff;
   margin-bottom: 8px;
   font-size: 32px;
   font-weight: 700;
@@ -47,9 +51,19 @@
   font-size: 16px;
 }
 
-.form-group {
+.form-group input {
   margin-bottom: 24px;
+  background-color: transparent;
 }
+
+.form-group label{
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #ffffff;
+  font-size: 14px;
+}
+
 
 label {
   display: block;
@@ -61,12 +75,13 @@ label {
 
 .form-control {
   width: 100%;
-  padding: 14px 16px;
+  padding: 12px;
   border: 2px solid #e2e8f0;
   border-radius: 8px;
   font-size: 16px;
   transition: all 0.3s ease;
-  background: #fff;
+  color: #ffffff;
+  box-sizing: border-box;
 }
 
 .form-control:focus {
@@ -109,38 +124,41 @@ label {
 
 /* Botões */
 .btn {
-  padding: 14px 24px;
+  width: 100%;
+  color: rgb(255, 255, 255);
   border: none;
+  padding: 14px;
   border-radius: 8px;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  text-align: center;
-  display: block;
-  width: 100%;
-}
-
-.btn-primary {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  margin-bottom: 16px;
+  margin-top: 10px;
+  background-color: transparent;
+  box-shadow: 0 0 0 3px rgba(76, 181, 106, 0.5);
 }
 
 .btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+  background: rgba(84, 233, 156, 0.1);
 }
 
 .btn-secondary {
   background: transparent;
-  color: #667eea;
-  border: 2px solid #e2e8f0;
+  color: #ffffff;
+  border: 2px solid #667eea;
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+  padding: 14px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  margin-top: 25px;
 }
 
 .btn-secondary:hover {
-  background: #f7fafc;
-  border-color: #667eea;
+  background: rgba(102, 126, 234, 0.1);
 }
 
 /* Divisor */
