@@ -1,22 +1,22 @@
-<div class="modal" *ngIf="showModal">
-  <div class="modal-content">
-    <!-- Informações do cliente -->
-    <div *ngIf="cliente" class="cliente-info">
-      <h3>Cliente: {{ cliente.nome }} (ID: {{ cliente.id }})</h3>
+<div class="modal-backdrop" *ngIf="showModal">
+  <div class="modal-container">
+
+    <!-- Cabeçalho -->
+    <div class="modal-header">
+      <h2>Comprar Produto</h2>
     </div>
 
-    <h2>Comprar Produto</h2>
-
+    <!-- Informações do Produto -->
     <div *ngIf="produto" class="produto-info">
-      <p><strong>Produto:</strong> {{ produto.nome }}</p>
-      <p><strong>Preço unitário:</strong> R$ {{ produto.preco | number:'1.2-2' }}</p>
-      <p><strong>Estoque disponível:</strong> {{ maxQuantidade }} unidades</p>
+      <p class="produto-nome">{{ produto.nome }}</p>
+      <p class="preco-unitario">Preço unitário: <strong>R$ {{ produto.preco | number:'1.2-2' }}</strong></p>
     </div>
 
+    <!-- Controle de Quantidade -->
     <div class="quantidade-section">
       <label>Quantidade:</label>
       <div class="quantidade-controls">
-        <button (click)="diminuirQuantidade()">-</button>
+        <button class="btn-quantidade" (click)="diminuirQuantidade()">-</button>
         <input
           type="number"
           [(ngModel)]="quantidade"
@@ -25,20 +25,22 @@
           [max]="maxQuantidade"
           class="quantidade-input"
         >
-        <button (click)="aumentarQuantidade()">+</button>
+        <button class="btn-quantidade" (click)="aumentarQuantidade()">+</button>
       </div>
     </div>
 
+    <!-- Total -->
     <div class="total-section">
-      <p><strong>Total:</strong> R$ {{ calcularTotal() | number:'1.2-2' }}</p>
+      <div class="total-line"></div>
+      <p class="total-text">Total: <strong>R$ {{ calcularTotal() | number:'1.2-2' }}</strong></p>
     </div>
 
-
-    <!-- Mensagem de feedback -->
-    <div *ngIf="mensagem" class="mensagem" [class.sucesso]="sucesso" [class.erro]="!sucesso">
+    <!-- Mensagem de Feedback -->
+    <div *ngIf="mensagem" class="mensagem-feedback" [class.sucesso]="sucesso" [class.erro]="!sucesso">
       {{ mensagem }}
     </div>
 
+    <!-- Botões de Ação -->
     <div class="modal-buttons">
       <button class="btn-cancelar" (click)="fecharModal()" [disabled]="loading">
         Cancelar
@@ -47,12 +49,6 @@
         {{ loading ? 'Processando...' : 'Adicionar ao Carrinho' }}
       </button>
     </div>
-
-    <app-carrinho
-      [produto]="produto"
-      [mercadoId]="mercadoId"
-      [cliente]="cliente"
-    ></app-carrinho>
 
   </div>
 </div>
