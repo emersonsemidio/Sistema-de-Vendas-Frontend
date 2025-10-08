@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Produto } from '../../models/produto.model';
 import { MercadoService } from '../../services/mercado.service';
@@ -11,6 +11,8 @@ import { CompraService, CompraRequest, CompraResponse } from '../../services/com
 })
 export class ProdutoListComponent implements OnInit {
   produtos: Produto[] = [];
+
+  @Input() produtoNome: string = '';
   loading: boolean = true;
   mercadoId!: number;
   produtoSelecionado: Produto | null = null;

@@ -16,10 +16,13 @@
         <div class="card-body">
           <h5 class="card-title">{{ mercado.nome }}</h5>
 
-          <img src="../../../assets/salgado.jpg" class="img-card" alt="">
+          <img src="../../../assets/salgado.jpg" class="img-card" alt="" />
         </div>
         <div class="card-footer bg-transparent">
-          <button class="botao-ver-lanches" [routerLink]="['/mercados', mercado.id, 'produtos']">
+          <button
+            class="botao-ver-lanches"
+            [routerLink]="['/mercados', mercado.id, 'produtos']"
+          >
             Ver Produtos
           </button>
         </div>
