@@ -1,0 +1,81 @@
+<nav class="simple-navbar">
+  <!-- Seu navbar atual aqui -->
+</nav>
+
+<div class="landing-page">
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container hero-container">
+      <h1 class="hero-title">
+        Fome de <span class="title-highlight">verdade</span>?
+      </h1>
+      <p class="hero-subtitle">Os lanches que fazem a galera voltar toda semana</p>
+
+      <div class="hero-actions">
+        <button class="cta-button primary" routerLink="/mercados">
+          <i class="fas fa-burger"></i>
+          Ver Cardápio Completo
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção Destaques -->
+  <section class="destaques-section">
+    <div class="container destaques-container">
+      <h2 class="section-title">Os <span class="text-destaque">Principais</span></h2>
+
+      <div class="destaques-grid">
+        <div class="produto-card" *ngFor="let produto of produtosDestaque">
+          <div class="card-image">
+            <img [src]="produto.imagem" [alt]="produto.nome">
+          </div>
+          <div class="card-content">
+            <h3>{{produto.nome}}</h3>
+            <p>{{produto.descricao}}</p>
+            <div class="card-footer">
+              <span class="preco">{{produto.preco | currency:'BRL'}}</span>
+              <button class="btn-pedir" routerLink="/mercados">
+                Pedir Agora
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção Depoimentos -->
+  <section class="depoimentos-section">
+    <div class="container depoimentos-container">
+      <h2 class="section-title">O que <span class="text-destaque">Dizem</span> de Nós</h2>
+
+      <div class="depoimentos-grid">
+        <div class="depoimento-card" *ngFor="let depoimento of depoimentos">
+          <div class="depoimento-header">
+            <div class="avatar">{{depoimento.nome.charAt(0)}}</div>
+            <div class="user-info">
+              <strong>{{depoimento.nome}}</strong>
+              <div class="rating">⭐ {{depoimento.avaliacao}}/5</div>
+            </div>
+          </div>
+          <p class="depoimento-texto">"{{depoimento.texto}}"</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Final -->
+  <section class="cta-section">
+    <div class="container cta-container">
+      <h2>Pronto para matar a fome?</h2>
+      <p>Mais de 500 clientes satisfeitos por mês</p>
+      <button class="cta-button final" routerLink="/mercados">
+        <i class="fas fa-bolt"></i>
+        Fazer Meu Pedido
+      </button>
+    </div>
+  </section>
+</div>
+
+<router-outlet></router-outlet>

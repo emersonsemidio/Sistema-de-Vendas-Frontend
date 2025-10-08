@@ -22,6 +22,7 @@ import { CadastroComponent } from './components/cadastro/cadastro.component';
 import { UserDropdownComponent } from './components/user-dropdown/user-dropdown.component';
 import { SobreComponent } from './components/sobre/sobre.component';
 import { ContatoComponent } from './components/contato/contato.component';
+import { InicioComponent } from './components/inicio/inicio.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { ContatoComponent } from './components/contato/contato.component';
     UserDropdownComponent,
     SobreComponent,
     ContatoComponent,
+    InicioComponent,
   ],
   imports: [
     BrowserModule,
