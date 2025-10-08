@@ -6,6 +6,7 @@ import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './services/auth-guard.service';
 import { CadastroComponent } from './components/cadastro/cadastro.component';
 import { SobreComponent } from './components/sobre/sobre.component';
+import { ContatoComponent } from './components/contato/contato.component';
 
 const routes: Routes = [
   { path: 'mercados', component: MercadoListComponent }, // ← Rota para seu componente
@@ -13,8 +14,9 @@ const routes: Routes = [
   { path: 'mercados/:id/produtos', component: ProdutoListComponent,  }, // ← Rota para o componente de produtos
   { path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
   { path: 'cadastro', component: CadastroComponent },
-  { path: 'sobre', component: SobreComponent }, // Rota padrão
-   // Rota para o componente de cadastro
+  { path: 'sobre', component: SobreComponent },
+  { path: 'contato', component: ContatoComponent }
+   // Rota para o componente de contato
 ];
 
 @NgModule({
