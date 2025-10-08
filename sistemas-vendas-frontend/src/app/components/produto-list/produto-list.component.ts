@@ -11,8 +11,6 @@ import { CompraService, CompraRequest, CompraResponse } from '../../services/com
 })
 export class ProdutoListComponent implements OnInit {
   produtos: Produto[] = [];
-
-  @Input() produtoNome: string = '';
   loading: boolean = true;
   mercadoId!: number;
   produtoSelecionado: Produto | null = null;
