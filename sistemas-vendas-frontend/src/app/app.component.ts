@@ -12,6 +12,12 @@ export class AppComponent {
   dropdownOpen = false;
   currentUser: any;
 
+  showModalCarrinho: boolean = false;
+
+  abrirModalCarrinho(): void {
+    this.showModalCarrinho = true;
+  }
+
   produtosDestaque = [
     {
       nome: 'Big Burger Artesanal',

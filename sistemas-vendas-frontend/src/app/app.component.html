@@ -17,11 +17,21 @@
       </a>
 
       <!-- Área de Login/Usuário -->
-      <div class="nav-botao-login" *ngIf="!usuarioEstaLogado">
         <a routerLink="/login" class="nav-item">
           <i class="fas fa-user"></i> Login
         </a>
-      </div>
+
+        <div class="div-carrinho">
+          <a class="nav-item" (click)="abrirModalCarrinho()" href="javascript:void(0)">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="carrinho-texto">Meu Carrinho</span>
+          </a>
+        </div>
+
+        <app-carrinho
+          [showModal]="showModalCarrinho"
+        >
+        </app-carrinho>
 
       <!-- Dropdown do usuário logado -->
       <div *ngIf="usuarioEstaLogado" class="nav-user-dropdown">
@@ -37,6 +47,9 @@
           (logout)="logout()"
           (close)="closeDropdown()">
         </app-user-dropdown>
+
+
+
       </div>
     </div>
   </div>

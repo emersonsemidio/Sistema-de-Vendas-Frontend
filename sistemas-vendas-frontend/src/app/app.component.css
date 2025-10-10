@@ -41,6 +41,10 @@
   color: #4CAF50;
   font-size: 1.6rem;
 }
+/*
+.div-carrinho {
+  margin-left: auto;
+} */
 
 .nav-menu {
   display: flex;
@@ -48,6 +52,7 @@
   margin-left: 5%;
   gap: 20px;
   align-items: flex-start;
+  flex-wrap: wrap;
 }
 
 .nav-item {
