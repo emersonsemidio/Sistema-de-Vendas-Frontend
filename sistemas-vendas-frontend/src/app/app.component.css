@@ -41,10 +41,10 @@
   color: #4CAF50;
   font-size: 1.6rem;
 }
-/*
+
 .div-carrinho {
   margin-left: auto;
-} */
+}
 
 .nav-menu {
   display: flex;
@@ -70,6 +70,11 @@
   background: #4CAF50;
 }
 
+@media (max-width: 1030px) {
+  .div-carrinho {
+    margin: 0;
+  }
+}
 
 /* Mobile */
 @media (max-width: 768px) {

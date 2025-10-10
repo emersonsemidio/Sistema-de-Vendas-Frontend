@@ -17,9 +17,26 @@
       </a>
 
       <!-- Área de Login/Usuário -->
+       <div *ngIf="!usuarioEstaLogado">
         <a routerLink="/login" class="nav-item">
           <i class="fas fa-user"></i> Login
         </a>
+      </div>
+
+      <!-- Dropdown do usuário logado -->
+      <div *ngIf="usuarioEstaLogado" class="nav-user-dropdown">
+        <a class="nav-item hover" (click)="toggleDropdown(); $event.stopPropagation()">
+          <i class="fas fa-user-circle"></i>
+          <span>Minha Conta</span>
+          <i class="fas fa-chevron-down" [class.rotate]="dropdownOpen"></i>
+        </a>
+        <app-user-dropdown
+          [isOpen]="dropdownOpen"
+          [user]="currentUser"
+          (logout)="logout()"
+          (close)="closeDropdown()">
+        </app-user-dropdown>
+      </div>
 
         <div class="div-carrinho">
           <a class="nav-item" (click)="abrirModalCarrinho()" href="javascript:void(0)">
@@ -34,24 +51,6 @@
         >
         </app-carrinho>
 
-      <!-- Dropdown do usuário logado -->
-      <div *ngIf="usuarioEstaLogado" class="nav-user-dropdown">
-        <a class="nav-item hover" (click)="toggleDropdown(); $event.stopPropagation()">
-          <i class="fas fa-user-circle"></i>
-          <span>Minha Conta</span>
-          <i class="fas fa-chevron-down" [class.rotate]="dropdownOpen"></i>
-        </a>
-
-        <app-user-dropdown
-          [isOpen]="dropdownOpen"
-          [user]="currentUser"
-          (logout)="logout()"
-          (close)="closeDropdown()">
-        </app-user-dropdown>
-
-
-
-      </div>
     </div>
   </div>
 </nav>

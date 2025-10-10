@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { CarrinhoService, ItemCarrinho } from '../../services/carrinho.service';
 import { CompraRequest, CompraService } from '../../services/compra.service';
 import { Produto } from 'src/app/models/produto.model';
+import { Cliente } from 'src/app/models/cliente.model';
+import { ClienteService } from 'src/app/services/cliente.service';
 
 @Component({
   selector: 'app-carrinho',
@@ -40,7 +42,8 @@ export class CarrinhoComponent implements OnInit {
     private compraService: CompraService,
     private router: Router,
 
-    private authService: AuthService
+    private authService: AuthService,
+    private clienteService: ClienteService
   ) {}
 
   ngOnInit(): void {
@@ -51,57 +54,90 @@ export class CarrinhoComponent implements OnInit {
     this.carrinhoService.carregarDoLocalStorage();
   }
 
-    confirmarCompraCarrinho(): void {
+  async confirmarCompraCarrinho(): Promise<void> {
+  if (!this.authService.isLoggedIn()) {
+    this.mostrarMensagem('Você precisa estar logado para confirmar a compra.', false);
+    return;
+  }
 
-      if (!this.authService.isLoggedIn()) {
-        this.mostrarMensagem('Você precisa estar logado para confirmar a compra.', false);
-        return;
-      }
+  try {
+    const clienteId = this.authService.getClienteId();
 
-      const compraData: CompraRequest = {
-        clienteId: this.authService.getClienteId(),
-        mercadoId: this.mercadoId,
-        total: this.calcularTotal(),
-        formaPagamento: 'PIX',
-        status: 'PENDENTE',
-        itens: this.carrinhoService
-          .obterItens()
-          .map((item) => {
-            console.log(item);
-            return {
-              produtoId: item.produto.id,
-              quantidade: item.quantidade,
-            };
-          }),
-      };
+    // Buscar dados do cliente
+    const cliente = await this.clienteService.getClienteById(clienteId).toPromise();
 
-      console.log('Dados da compra:', compraData);
-
-        this.compraService.realizarCompra(compraData).subscribe({
-          next: (compraResponse) => {
-            this.confirmar.emit({
-              produto: this.produto,
-              quantidade: this.quantidade
-            });
-
-            this.mostrarMensagem('Compra realizada com sucesso!', true);
-
-            setTimeout(() => {
-              this.fecharModal();
-            }, 2000);
-          },
-          error: (error) => {
-            this.mostrarMensagem(
-              error.error?.message || error.message || 'Erro ao realizar compra',
-              false
-            );
-            this.loading = false;
-          }
-        })
-
-        this.carrinhoService.limparCarrinho();
-
+    if (!cliente) {
+      this.mostrarMensagem('Cliente não encontrado.', false);
+      return;
     }
+
+    // Obter itens do carrinho
+    const itensCarrinho = this.carrinhoService.obterItens();
+
+    if (itensCarrinho.length === 0) {
+      this.mostrarMensagem('Carrinho vazio.', false);
+      return;
+    }
+
+    // Preparar dados para a mensagem
+    const mensagem = this.formatarMensagemWhatsApp(cliente, itensCarrinho);
+
+    // Codificar a mensagem para URL
+    const mensagemCodificada = encodeURIComponent(mensagem);
+
+    // Número do WhatsApp do mercado (substitua pelo número real)
+    const numeroWhatsAppMercado = '5521976776113';
+
+    // Criar URL do WhatsApp
+    const urlWhatsApp = `https://wa.me/${numeroWhatsAppMercado}?text=${mensagemCodificada}`;
+
+    // Abrir WhatsApp em nova aba
+    window.open(urlWhatsApp, '_blank');
+
+    this.mostrarMensagem('Redirecionando para o WhatsApp...', true);
+
+    // Limpar carrinho após enviar mensagem
+    this.carrinhoService.limparCarrinho();
+
+    setTimeout(() => {
+      this.fecharModal();
+    }, 2000);
+
+  } catch (error) {
+    this.mostrarMensagem(
+      'Erro ao preparar mensagem para WhatsApp.',
+      false
+    );
+    this.loading = false;
+  }
+}
+
+private formatarMensagemWhatsApp(cliente: Cliente, itensCarrinho: any[]): string {
+  const total = this.calcularTotal();
+
+  let mensagem = `🛒 *PEDIDO REALIZADO* 🛒\n\n`;
+  mensagem += `*Cliente:* ${cliente.nome}\n`;
+  mensagem += `*Endereço:* ${cliente.endereco || 'N/A'}\n`;
+  mensagem += `*Telefone:* ${cliente.telefone || 'N/A'}\n\n`;
+
+  mensagem += `*ITENS DO PEDIDO:*\n`;
+  mensagem += `--------------------------------\n`;
+
+  itensCarrinho.forEach((item, index) => {
+    mensagem += `${index + 1}. ${item.produto.nome}\n`;
+    mensagem += `   Quantidade: ${item.quantidade}\n`;
+    mensagem += `   Preço unitário: R$ ${item.produto.preco.toFixed(2)}\n`;
+    mensagem += `   Subtotal: R$ ${(item.produto.preco * item.quantidade).toFixed(2)}\n\n`;
+  });
+
+  mensagem += `--------------------------------\n`;
+  mensagem += `*TOTAL: R$ ${total.toFixed(2)}*\n\n`;
+  mensagem += `*Forma de Pagamento:* PIX\n`;
+  mensagem += `*Status:* PENDENTE\n\n`;
+  mensagem += `Aguardando confirmação do mercado.`;
+
+  return mensagem;
+}
 
 
   private mostrarMensagem(msg: string, sucesso: boolean) {
