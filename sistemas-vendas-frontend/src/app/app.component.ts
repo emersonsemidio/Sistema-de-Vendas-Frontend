@@ -18,6 +18,10 @@ export class AppComponent {
     this.showModalCarrinho = true;
   }
 
+  fecharModalCarrinho(): void {
+    this.showModalCarrinho = false;
+  }
+
   produtosDestaque = [
     {
       nome: 'Big Burger Artesanal',
